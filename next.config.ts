@@ -17,7 +17,8 @@ const cspDirectives = [
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
-  "upgrade-insecure-requests",
+  // upgrade-insecure-requests rewrites ws: → wss:, which breaks the dev HMR WebSocket
+  ...(!isDev ? ["upgrade-insecure-requests"] : []),
 ];
 
 const securityHeaders = [
